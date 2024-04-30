@@ -119,6 +119,48 @@ const routes = [
         ],
       },
       {
+        path: '/product',
+        name: 'product',
+        component: {
+          render() {
+            return h(resolveComponent('router-view'))
+          },
+        },
+        redirect: '/product/list',
+        children: [
+          {
+            path: '/product/list',
+            name: 'list',
+            component: () => import('@/views/product/Products.vue'),
+          },
+          {
+            path: '/product/add',
+            name: 'addProduct',
+            component: () => import('@/views/product/addProduct.vue'),
+          },
+          {
+            path: '/product/catergory',
+            name: 'catergory',
+            component: () => import('@/views/product/Catergory.vue'),
+          },
+          {
+            path: '/product/tag',
+            name: 'tag',
+            component: () => import('@/views/product/Tag.vue'),
+          },
+          {
+            path: '/product/brand',
+            name: 'brand',
+            component: () => import('@/views/product/Brand.vue'),
+          },
+          {
+            path: '/product/size',
+            name: 'size',
+            component: () => import('@/views/product/Size.vue'),
+          },
+        ]
+      },
+      {
         path: '/buttons',
         name: 'Buttons',
         component: {
