@@ -1,17 +1,3 @@
-
-<script setup>
-import { computed } from 'vue'
-import { RouterLink } from 'vue-router'
-import { useStore } from 'vuex'
-import { AppSidebarNav } from './AppSidebarNav'
-import { logo } from '@/assets/brand/logo'
-import { sygnet } from '@/assets/brand/sygnet'
-
-const store = useStore()
-const sidebarUnfoldable =  computed(() => store.state.sidebarUnfoldable)
-const sidebarVisible = computed(() => store.state.sidebarVisible)
-</script>
-
 <template>
   <CSidebar
     class="border-end"
@@ -28,11 +14,8 @@ const sidebarVisible = computed(() => store.state.sidebarVisible)
     "
   >
     <CSidebarHeader class="border-bottom">
-      <RouterLink custom to="/" v-slot="{ href, navigate }">
-        <CSidebarBrand v-bind="$attrs" as="a" :href="href" @click="navigate">
-          <CIcon custom-class-name="sidebar-brand-full" :icon="logo" :height="32" />
-          <CIcon custom-class-name="sidebar-brand-narrow" :icon="sygnet" :height="32" />
-        </CSidebarBrand>
+      <RouterLink custom to="/">
+        <h2>Admin</h2>
       </RouterLink>
       <CCloseButton class="d-lg-none" dark @click="$store.commit('toggleSidebar')" />
     </CSidebarHeader>
@@ -42,3 +25,28 @@ const sidebarVisible = computed(() => store.state.sidebarVisible)
     </CSidebarFooter>
   </CSidebar>
 </template>
+
+<script>
+import { computed } from 'vue'
+import { RouterLink } from 'vue-router'
+import { useStore } from 'vuex'
+import { AppSidebarNav } from './AppSidebarNav'
+import { logo } from '@/assets/brand/logo'
+import { sygnet } from '@/assets/brand/sygnet'
+export default {
+  name: 'AppSidebar',
+  components: {
+    AppSidebarNav,
+    RouterLink,
+  },
+  setup() {
+    const store = useStore()
+    return {
+      logo,
+      sygnet,
+      sidebarUnfoldable: computed(() => store.state.sidebarUnfoldable),
+      sidebarVisible: computed(() => store.state.sidebarVisible),
+    }
+  },
+}
+</script>
